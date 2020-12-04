@@ -37,20 +37,20 @@ template <class ValType>
 TMatrix<ValType>::TMatrix(int s) : TVector<TVector<ValType> >(s)
 {
 	if ((s < 0) || (s > MAX_MATRIX_SIZE)) throw logic_error("incorrect parametr");
-	for (int i = 0; i < s; i++)
+	for (int i = 0; i < this->Size - this->StartIndex; i++)
 	{
-		TVector<ValType>Res(i + 1);
-		(*this)[i] = Res;
+		TVector<ValType>res(s - i, i);
+		this->pVector[i] = res;
 	}
 }
 
 template <class ValType> 
 TMatrix<ValType>::TMatrix(const TMatrix<ValType>& mt) :TVector<TVector<ValType> >(mt)
 {
-	for (int i = 0; i < (*this).GetSize(); i++)
+	for (int i = this->StartIndex; i < this->Size; i++)
 	{
-		TVector<ValType>mt(mt[i]);
-		(*this)[i] = mt;
+		TVector<ValType>res(mt[i]);
+		(*this)[i] = res;
 	}
 	Size = mt.GetSize();
 	StartIndex = mt.GetStartIndex();
