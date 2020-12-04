@@ -90,15 +90,15 @@ TVector<ValType>::~TVector()
 template <class ValType> 
 ValType& TVector<ValType>::operator[](int pos)
 {
-	if ((pos < 0) || (pos > (*this).GetStartIndex() + (*this).GetSize())) throw logic_error("negative index");
-	return pVector[pos];
+	if ((pos < StartIndex) || (pos < 0) || (pos > StartIndex + Size)) throw logic_error("negative index");
+	return pVector[pos - StartIndex];
 }
 
 template <class ValType> 
 const ValType& TVector<ValType>::operator[](int pos)const
 {
-	if ((pos < 0) || (pos >= (*this).GetStartIndex() + (*this).GetSize())) throw logic_error("negative index");
-	return pVector[pos];
+	if ((pos < StartIndex) || (pos < 0) || (pos > StartIndex + Size)) throw logic_error("negative index");
+	return pVector[pos - StartIndex];
 }
 
 template <class ValType> 
